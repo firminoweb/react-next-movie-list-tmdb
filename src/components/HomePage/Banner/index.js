@@ -9,6 +9,7 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
   const [index, setIndex] = useState(0);
   const [filterData, setFilterData] = useState("");
   const [randomImage, setRandomImage] = useState("");
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Seleciona uma imagem aleatória ao carregar a página
   useEffect(() => {
@@ -22,19 +23,13 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
 
   // Handlers
   const handlerNextImage = () => {
-    if (index === datas.length - 1) {
-      setIndex(0);
-    } else {
-      setIndex(index + 1);
-    }
+    setIndex(index === datas.length - 1 ? 0 : index + 1);
+    setImageLoaded(false);
   };
 
   const handlerPrevImage = () => {
-    if (index === 0) {
-      setIndex(datas.length - 1);
-    } else {
-      setIndex(index - 1);
-    }
+    setIndex(index === 0 ? datas.length - 1 : index - 1);
+    setImageLoaded(false);
   };
 
   const handlerSubmit = (e) => {
@@ -93,43 +88,56 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
             alt="Back Icon"
             width={45}
             height={45}
+            loading="lazy" // Lazy loading aplicado
           />
         </div>
-        {
-          <div className="relative hover:scale-105 transition-all ease-in-out duration-300 shadow-lg group/banner active:scale-100">
-            {isLoading ? (
-              <BannerSkeleton />
-            ) : (
-              datas.map((e, i) => {
-                if (i === index) {
-                  return (
-                    <Link
-                      key={e.id}
-                      href={
-                        e.media_type === "movie"
-                          ? `/movies/details/${e.id}`
-                          : `/series/details/${e.id}`
-                      }
-                    >
-                      <div className="absolute z-20 opacity-0 group-hover/banner:opacity-100 transition-all ease-in-out duration-300 font-bold p-4 bottom-4">
-                        <h1 className="text-xl">{e.title ? e.title : e.name}</h1>
+        <div className="relative hover:scale-105 transition-all ease-in-out duration-300 shadow-lg group/banner active:scale-100">
+          {isLoading ? (
+            <BannerSkeleton />
+          ) : (
+            datas.map((e, i) => {
+              if (i === index) {
+                return (
+                  <Link
+                    key={e.id}
+                    href={
+                      e.media_type === "movie"
+                        ? `/movies/details/${e.id}`
+                        : `/series/details/${e.id}`
+                    }
+                  >
+                    <div className="relative h-full w-full flex justify-center items-center">
+                      <div
+                        className={`absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-2xl transition-opacity duration-500 ease-in-out ${
+                          imageLoaded ? "opacity-0" : "opacity-100"
+                        }`}
+                      >
+                        {/* <BannerSkeleton /> */}
                       </div>
-                      <div className="h-full w-full bg-black absolute rounded-xl opacity-0 group-hover/banner:opacity-50 transition-all ease-in-out duration-300 cursor-pointer"></div>
                       <Image
                         alt={e.title ? e.title : e.name}
-                        className="rounded-2xl w-fit"
-                        width={700}
-                        height={700}
+                        className={`rounded-2xl transition-opacity duration-500 ease-in-out ${
+                          imageLoaded ? "opacity-100" : "opacity-0"
+                        }`}
                         src={`https://image.tmdb.org/t/p/w500${e.backdrop_path}`}
+                        width={478}
+                        height={268} // Mantém proporção da imagem 16:9
+                        onLoadingComplete={() => setImageLoaded(true)}
+                        loading="lazy"
                       />
-                    </Link>
-                  );
-                }
-              })
-            )}
-          </div>
-        }
-
+                      <div className="absolute inset-0 bg-black rounded-xl opacity-0 group-hover/banner:opacity-50 transition-all ease-in-out duration-300 cursor-pointer"></div>
+                      <div className="absolute z-20 opacity-0 group-hover/banner:opacity-100 transition-all ease-in-out duration-300 font-bold p-4 bottom-4">
+                        <h1 className="text-xl">
+                          {e.title ? e.title : e.name}
+                        </h1>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              }
+            })
+          )}
+        </div>
         <div
           className="opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 cursor-pointer hover:scale-105"
           onClick={handlerNextImage}
@@ -140,6 +148,7 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
             alt="Forward"
             width={45}
             height={45}
+            loading="lazy"
           />
         </div>
       </div>

@@ -30,8 +30,8 @@ export default function ContentHeader() {
 
   return (
     <div className={`flex justify-center items-center gap-5 font-bold text-white`}>
-      <Link href={"/"} className="text-2xl cursor-pointer mr-10">
-        MoviList
+      <Link href={"/"} className="text-2xl cursor-pointer mr-10 text-tertiary">
+        Pilar Movies
       </Link>
       <ul className="flex gap-7 text-base">
         <li

@@ -4,7 +4,7 @@ import MoreDetails from "./MoreDetails";
 export default function DetailPage({ detailData }) {
 
     return(
-        <main className="min-h-screen items-center py-16 bg-gray-200 p-2">
+        <main className="items-center py-16 bg-gray-200">
             <Detail detailData={detailData} />
             <MoreDetails detailData={detailData} />
         </main>

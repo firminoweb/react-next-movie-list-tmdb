@@ -22,7 +22,7 @@ const fetchData = async (path) => {
 export default async function MoviesDetail ({params}) {
     const seriesDetail = await fetchData(`/tv/${params.id}`);
     const recommendationsSeries = await fetchData(`/tv/${params.id}/recommendations`);
-    const cardTitle = "Recommendations"
+    const cardTitle = "Recomendações"
     return (   
         <>
         <Suspense fallback={<Loading />}>

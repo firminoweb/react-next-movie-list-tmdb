@@ -14,8 +14,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR" className={`${roboto.variable}`}>
       <head>
-        <title>Movies Preview</title>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <title>Pilar Movies</title>
+        <link href="/favicon-black.png" rel="shortcut icon" type="image/x-icon"/>
       </head>
       <body>
         <Header />

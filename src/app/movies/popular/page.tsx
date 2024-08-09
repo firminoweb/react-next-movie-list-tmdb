@@ -1,6 +1,6 @@
 import HomePage from "@/components/HomePage";
 
-export default function Movies() {
+export default function MoviesPopular() {
 
     const propsData = {
         title: "Aqui estão os filmes populares.",

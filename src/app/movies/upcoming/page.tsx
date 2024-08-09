@@ -1,6 +1,6 @@
 import HomePage from "@/components/HomePage";
 
-export default function Movies() {
+export default function MoviesUpcoming() {
 
     const propsData = {
         title: "Filmes que estão por vir.",

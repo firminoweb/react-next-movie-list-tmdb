@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import arrowBackIcon from "@/../public/icon/arrow-back.svg";
-import arrowForward from "@/../public/icon/arrow-forward.svg";
+import arrowBackIcon from "../../../../public/icon/arrow-back.svg";
+import arrowForward from "../../../../public/icon/arrow-forward.svg";
 import BannerSkeleton from "@/components/LoadingSkeleteon/BannerSkeleton";
 import { BannerProps } from "@/types";
 

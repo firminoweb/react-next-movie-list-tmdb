@@ -23,7 +23,7 @@ export default function HomePage({ path, propsData }: HomePageProps) {
             const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_ENDPOINT + path}`, options);
             const dataWithDefaults = result.data.results.map((item: DataItem) => ({
                 ...item,
-                poster_path: item.poster_path || '', // Define um valor padrão se estiver undefined
+                poster_path: item.poster_path || '',
             }));
             setData(dataWithDefaults);
             setOriData(dataWithDefaults);

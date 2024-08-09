@@ -1,6 +1,6 @@
 import HomePage from "@/components/HomePage";
 
-export default function Movies() {
+export default function MoviesTopRated() {
 
     const propsData = {
         title: "Aqui estão os filmes mais bem avaliados.",
@@ -12,7 +12,7 @@ export default function Movies() {
 
     return(
         <>
-            <HomePage path={"/movie/top_rated"} propsData={propsData} />
+            <HomePage path={"/movie/top_rated?language=pt-BR"} propsData={propsData} />
         </>
     )
 } 

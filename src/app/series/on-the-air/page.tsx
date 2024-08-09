@@ -1,6 +1,6 @@
 import HomePage from "@/components/HomePage";
 
-export default function Movies() {
+export default function SeriesOnAir() {
 
     const propsData = {
         title: "Aqui estão as séries de TV no ar.",
@@ -12,7 +12,7 @@ export default function Movies() {
 
     return(
         <>
-            <HomePage path={"/tv/top_rated?language=pt-BR"} propsData={propsData} />
+            <HomePage path={"/tv/on_the_air?language=pt-BR"} propsData={propsData} />
         </>
     )
 } 

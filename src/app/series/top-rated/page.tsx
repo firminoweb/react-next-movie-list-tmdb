@@ -1,6 +1,6 @@
 import HomePage from "@/components/HomePage";
 
-export default function Movies() {
+export default function SeriesTopRated() {
 
     const propsData = {
         title: "Aqui estão as séries de TV mais bem avaliadas.",

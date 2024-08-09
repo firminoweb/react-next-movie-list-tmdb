@@ -55,9 +55,9 @@ export default function Card({ datas, propsData, onResetData, isLoading }: CardP
         <>
             {isLoading ? <CardSkeleton cards={10} /> :
                 datas.length === 0 ? (
-                    <div className="w-full p-4 flex items-center justify-center">
+                    <div className="w-full p-20 flex items-center justify-center">
                         <div className="p-2">
-                            <h1 className="text-xl text-gray-700 font-bold">{`Os filmes ou séries não foram encontrados em ${propsData.cardTitle}`}</h1>
+                            <h1 className="text-xl text-gray-700 font-bold">{`O filme ou série não pode ser encontrado em: ${propsData.cardTitle}`}</h1>
                             <div className="m-2 flex items-center justify-center">
                                 <button onClick={onResetData} className="p-2 px-4 text-white font-bold hover:bg-secondary duration-200 active:bg-tertiary bg-primary rounded-lg cursor-pointer">OK</button>
                             </div>

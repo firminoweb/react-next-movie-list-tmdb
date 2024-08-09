@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import arrowBackIcon from "@/../public/icon/arrow-back.svg";
 import arrowForward from "@/../public/icon/arrow-forward.svg";
 import BannerSkeleton from "@/components/LoadingSkeleteon/BannerSkeleton";
+import { BannerProps } from "@/types";
 
-export default function Banner({ datas, propsData, onSearch, isLoading }) {
+// Tipos das props do componente
+
+export default function Banner({ datas, propsData, onSearch, isLoading }: BannerProps) {
   const [index, setIndex] = useState(0);
   const [filterData, setFilterData] = useState("");
   const [randomImage, setRandomImage] = useState("");
@@ -32,9 +37,10 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
     setImageLoaded(false);
   };
 
-  const handlerSubmit = (e) => {
+  const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSearch(e.target.elements.searchInput.value);
+    const searchInput = e.currentTarget.elements.namedItem('searchInput') as HTMLInputElement;
+    onSearch(searchInput.value);
     setFilterData("");
   };
 
@@ -56,7 +62,7 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
         <h1 className="text-4xl m-2">{propsData.title}</h1>
         <h1 className="text-2xl m-2">{propsData.desc}</h1>
         <form
-          onSubmit={(e) => handlerSubmit(e)}
+          onSubmit={handlerSubmit}
           className="w-full rounded-full shadow-lg text-primary my-4 flex relative lg:mt-20 mt-10"
         >
           <input
@@ -88,7 +94,7 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
             alt="Back Icon"
             width={45}
             height={45}
-            loading="lazy" // Lazy loading aplicado
+            loading="lazy"
           />
         </div>
         <div className="relative hover:scale-105 transition-all ease-in-out duration-300 shadow-lg group/banner active:scale-100">
@@ -111,18 +117,16 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
                         className={`absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-2xl transition-opacity duration-500 ease-in-out ${
                           imageLoaded ? "opacity-0" : "opacity-100"
                         }`}
-                      >
-                        {/* <BannerSkeleton /> */}
-                      </div>
+                      />
                       <Image
-                        alt={e.title ? e.title : e.name}
+                        alt={e.title ? e.title : e.name || 'Imagem sem título'}
                         className={`rounded-2xl transition-opacity duration-500 ease-in-out ${
                           imageLoaded ? "opacity-100" : "opacity-0"
                         }`}
                         src={`https://image.tmdb.org/t/p/w500${e.backdrop_path}`}
                         width={478}
-                        height={268} // Mantém proporção da imagem 16:9
-                        onLoadingComplete={() => setImageLoaded(true)}
+                        height={268}
+                        onLoad={() => setImageLoaded(true)}
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-black rounded-xl opacity-0 group-hover/banner:opacity-50 transition-all ease-in-out duration-300 cursor-pointer"></div>
@@ -135,6 +139,7 @@ export default function Banner({ datas, propsData, onSearch, isLoading }) {
                   </Link>
                 );
               }
+              return null;
             })
           )}
         </div>

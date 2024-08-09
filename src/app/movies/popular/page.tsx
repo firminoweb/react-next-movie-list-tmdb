@@ -12,7 +12,7 @@ export default function Movies() {
 
     return(
         <>
-            <HomePage path={"/movie/popular"} propsData={propsData} />
+            <HomePage path={"/movie/popular?language=pt-BR"} propsData={propsData} />
         </>
     )
 } 

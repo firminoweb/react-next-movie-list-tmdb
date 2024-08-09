@@ -1,4 +1,5 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
 export default function BannerSkeleton() {
     return (
         <SkeletonTheme baseColor="#b3b3b3" highlightColor="#a3a3a3">

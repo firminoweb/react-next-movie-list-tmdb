@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { DetailProps } from "@/types";
 
-export default function Detail({ detailData }) {
+export default function Detail({ detailData }: DetailProps) {
   // Definindo o estilo do background com a cor primary e a imagem do catálogo
   const detailStyle = {
     backgroundColor: "rgba(13, 37, 63, 0.8)",
@@ -14,13 +15,13 @@ export default function Detail({ detailData }) {
     `,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    backgroundBlendMode: "overlay",
+    backgroundBlendMode: "overlay" as const,
   };
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
   // Função para formatar a data no padrão dd/mm/yyyy
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('pt-BR', {
       day: '2-digit',
@@ -30,8 +31,8 @@ export default function Detail({ detailData }) {
   };
 
   // Função para extrair o ano da data
-  const getYear = (dateString) => {
-    if (!dateString) return ''; // Evita tentar processar datas inválidas
+  const getYear = (dateString?: string) => {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.getFullYear();
   };
@@ -39,7 +40,7 @@ export default function Detail({ detailData }) {
   return (
     <div className="shadow-lg items-center flex p-8 md:p-9" style={detailStyle}>
       <div className="shadow-lg mx-2 md:mx-10 relative group w-48 md:w-56">
-        <Link href={detailData.homepage} target="blank">
+        <Link href={detailData.homepage || "#"} target="_blank">
           <div className="h-full w-full bg-black absolute rounded-xl opacity-0 group-hover:opacity-50 transition-all ease-in-out duration-300"></div>
           
           {/* Skeleton Loader enquanto a imagem carrega */}
@@ -56,8 +57,8 @@ export default function Detail({ detailData }) {
             src={`https://image.tmdb.org/t/p/w500${detailData.poster_path}`}
             width={230}
             height={230}
-            alt={detailData.title ? detailData.title : detailData.name}
-            onLoadingComplete={() => setImageLoaded(true)}
+            alt={detailData.title ? detailData.title : detailData.name || "Imagem sem título"}
+            onLoad={() => setImageLoaded(true)}
             loading="lazy"
           />
         </Link>
@@ -69,7 +70,7 @@ export default function Detail({ detailData }) {
         </h1>
         <div className="my-2 flex gap-4 items-center w-fit">
           <p className="text-sm md:text-lg font-bold">
-            {detailData.release_date ? formatDate(detailData.release_date) : formatDate(detailData.last_air_date)}
+            {detailData.release_date ? formatDate(detailData.release_date) : formatDate(detailData.last_air_date || "")}
           </p>
           <p className="text-sm font-normal md:text-base">
             {`Status: ${detailData.status}`}

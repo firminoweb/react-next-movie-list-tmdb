@@ -1,28 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { Roboto } from "next/font/google";
 import { useState } from "react";
+import { Route, ListContentProps } from "@/types";
 
-const roboto = Roboto({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--roboto",
-});
 
 export default function ContentHeader() {
   const [isMovieHovered, setMovieHovered] = useState(false);
   const [isSeriesHovered, setSeriesHovered] = useState(false);
 
-  const routeMovies = {
+  const routeMovies: Route = {
     popular: "/movies/popular",
     topRated: "/movies/top-rated",
     upComing: "/movies/upcoming",
   };
 
-  const routeSeries = {
+  const routeSeries: Route = {
     popular: "/series/popular",
     topRated: "/series/top-rated",
     onTheAir: "/series/on-the-air",
@@ -55,7 +48,7 @@ export default function ContentHeader() {
   );
 }
 
-function ListContent({ isHovered, route }) {
+function ListContent({ isHovered, route }: ListContentProps) {
   return (
     <ul
       className={
@@ -64,13 +57,17 @@ function ListContent({ isHovered, route }) {
       }
     >
       <li className="transform transition-transform duration-300 py-1 hover:translate-x-1 ease-in-out">
-        <Link href={route.popular}>Popular</Link>
+        <Link href={route.popular}>
+          Popular
+        </Link>
       </li>
       <li className="transform transition-transform duration-300 py-1 hover:translate-x-1 ease-in-out">
-        <Link href={route.topRated}>Mais votados</Link>
+        <Link href={route.topRated}>
+          Mais votados
+        </Link>
       </li>
       <li className="transform transition-transform duration-300 py-1 hover:translate-x-1 ease-in-out">
-        <Link href={route.upComing || route.onTheAir}>
+        <Link href={route.upComing || route.onTheAir || ""}>
           {route.upComing ? `Em breve` : "No Ar"}
         </Link>
       </li>

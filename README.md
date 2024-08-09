@@ -25,6 +25,8 @@ Acesse a versão on-line para verificar: [https://teste-pilar.vercel.app](https:
 * **/movies/details/**: Exibe os detalhes de um filme específico, incluindo sinopse, gêneros, e mais.
 * **/series/details/**: Exibe os detalhes de uma série específica, incluindo sinopse, gêneros, e mais
 
+**OBS**: O Filtro/Busca vai funcionar como catalizador exclusivo de informação restrito á rota que estiver, por exemplo: Se estiver na home, ele vai filtrar os resultados da home, caso esteja em uma categoria específica como Filmes ou Séries, ele vai filtrar correspondente a categoria que estiver.
+
 ## Instalação e Inicialização do Projeto
 
 ### Pré-requisitos

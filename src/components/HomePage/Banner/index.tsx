@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";  // Importa o hook useRouter
 import arrowBackIcon from "../../../../public/icon/arrow-back.svg";
 import arrowForward from "../../../../public/icon/arrow-forward.svg";
 import BannerSkeleton from "@/components/LoadingSkeleteon/BannerSkeleton";
@@ -15,6 +16,7 @@ export default function Banner({ datas, propsData, onSearch, isLoading }: Banner
   const [filterData, setFilterData] = useState("");
   const [randomImage, setRandomImage] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
+  const router = useRouter();  // Instância do useRouter
 
   // Seleciona uma imagem aleatória ao carregar a página
   useEffect(() => {
@@ -25,6 +27,16 @@ export default function Banner({ datas, propsData, onSearch, isLoading }: Banner
       );
     }
   }, [datas]);
+
+  // Captura o valor de busca da URL quando o componente é montado
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const searchQuery = params.get('search') || '';
+    setFilterData(searchQuery);
+    if (searchQuery) {
+      onSearch(searchQuery);
+    }
+  }, []);
 
   // Handlers
   const handlerNextImage = () => {
@@ -40,8 +52,10 @@ export default function Banner({ datas, propsData, onSearch, isLoading }: Banner
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const searchInput = e.currentTarget.elements.namedItem('searchInput') as HTMLInputElement;
-    onSearch(searchInput.value);
-    setFilterData("");
+    const searchQuery = searchInput.value;
+    onSearch(searchQuery);
+    setFilterData(searchQuery);
+    router.push(`?search=${encodeURIComponent(searchQuery)}`);  // Adiciona a busca na URL
   };
 
   const bannerStyle = {

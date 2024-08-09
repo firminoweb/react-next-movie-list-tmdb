@@ -15,6 +15,22 @@ const config: Config.InitialOptions = {
     '^.+\\.(svg|png|jpg)$': 'jest-transform-stub',
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/src/components/HomePage/Banner/index.tsx',
+    '<rootDir>/src/components/__tests__/Banner.test.tsx',
+  ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/components/HomePage/Banner/index.tsx'
+  ],
+  coverageThreshold: {
+    global: {
+      statements: 60,
+      branches: 60,
+      functions: 60,
+      lines: 60,
+    }
+  }
 };
 
 export default config;

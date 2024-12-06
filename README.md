@@ -1,8 +1,7 @@
-# Pilar Movies (Teste Técnico)
+# Movie List (TMDB) | React + Next.js
 
-Acesse a versão on-line para verificar: [https://teste-pilar.vercel.app](https://teste-pilar.vercel.app)
 ## Visão geral
-**Pilar Movies** é uma aplicação web desenvolvida com **Next.js**, **React.js**, **TypeScript** e uma série de outras tecnologias modernas para fornecer uma experiência de usuário rica em informações sobre filmes e séries. A aplicação permite que os usuários explorem, pesquisem e obtenham detalhes sobre suas produções favoritas.
+**Movie List (TMDB)** é uma aplicação web desenvolvida com **Next.js**, **React.js**, **TypeScript** e uma série de outros recursos para fornecer uma experiência de usuário rica em informações sobre filmes e séries. A aplicação permite que os usuários explorem, pesquisem e obtenham detalhes sobre suas produções favoritas.
 
 ## Tecnologias Utilizadas
 * **Next.js**: Framework React para produção com suporte a renderização do lado do servidor (SSR) e geração de sites estáticos (SSG).
